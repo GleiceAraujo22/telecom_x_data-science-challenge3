@@ -1,4 +1,4 @@
-# 📊 Telecom X – Parte 2: Previsão de Evasão de Clientes (Churn)  
+# 📊 Telecom X – Parte 2: Previsão de Evasão de Clientes (Churn) - Machine Learning
  
 ## 📌 Descrição do Projeto
  Este projeto é a parte 2 de uma análise exploratória dos dados onde nessa etapa iremos construir modelos de machine learning para previsão de evasão de clientes de uma empresa de telecomunicações. Utilizamos técnicas avançadas de análise de dados, machine learning e balanceamento de dados para identificar os principais fatores e padrões que contribuem para evasão de clientes. 
@@ -19,7 +19,7 @@
   * **Random Forest**: Conjunto de várias árvores de decisão (Ensemble), reduzindo o risco de overfitting e melhorando a robustez. Costuma ter bom desempenho em problemas de classificação como churn, pois equilibra interpretabilidade e capacidade preditiva, capturando padrões mais complexos nos dados.
 
 
-## 📊 Análise dos Modelos Treinados  
+## 📊 Análise e Desempenho dos Modelos Treinados  
 
 ### Estratégia para lidar com o desbalanceamento entre as classes da variável alvo (Churn)
 
@@ -82,11 +82,13 @@ Optei por utilizar essa técnica para não prejudicar o modelo de regressão log
 | gender_Male                        | 1.001830  |
 
 --- 
-### Matriz de confusão e métricas de avaliação 
+### 📊 Matriz de confusão e métricas de avaliação 
 
 A matriz de confusão é importante porque permite avaliar detalhadamente o desempenho de um modelo de classificação, mostrando quantos casos foram corretamente ou incorretamente classificados para cada classe. Ela fornece insights sobre acertos, erros e desequilíbrios entre classes, complementando métricas como acurácia, precisão, recall e F1-score. 
 
-O foco principal no projeto são em clientes que abandonam o serviço (Churn = 1) porém como naturalmente são dados desbalanceados (a proporção de clientes que abandonam é menor do que a proporção de clientes ativos) 
+O foco principal no projeto são em clientes que abandonam o serviço (Churn = 1) porém como naturalmente são dados desbalanceados ou seja, a proporção de clientes que abandonam é menor do que a proporção de clientes ativos foquei em encontrar o equilibrio nas metricas de avaliação ao determinar os melhores modelos.  No contexto de previsão de churn, o **recall(sensibilidade) foi priorizado*** como métrica principal, pois representa a capacidade do modelo em identificar corretamente os clientes que realmente irão cancelar o serviço. Um recall elevado é essencial, já que perder clientes sem detectá-los gera impacto direto na receita e na retenção.
+
+Entretanto, ao priorizar o recall, existe um **trade-off** com a precisão (precision): o modelo pode classificar alguns clientes como churn (falsos positivos) mesmo que não estejam em risco real. Apesar disso, esse custo tende a ser menos crítico para o negócio do que deixar de identificar clientes que efetivamente irão sair. Em resumo, o foco foi maximizar a detecção de clientes em risco, ainda que isso implique em abordagens de retenção para alguns clientes que não cancelariam(falsos positivos).
 
 ![](visualizations/confusion_matrix_logistic.png) 
   
@@ -95,7 +97,8 @@ O foco principal no projeto são em clientes que abandonam o serviço (Churn = 1
 ![](visualizations/confusion_matrix_dt.png)  
 
 --- 
-![](visualizations/confusion_matrix_rf.png)   
+![](visualizations/confusion_matrix_rf.png)    
+
 
 --- 
 ![Curva ROC - Regressão logística](visualizations/roc_curve_logistic_r.png) 
@@ -104,9 +107,36 @@ O foco principal no projeto são em clientes que abandonam o serviço (Churn = 1
 ![Curva ROC - Decision tree](visualizations/roc_curve_dt.png)  
 
 --- 
-![Curva ROC - Random Forest](visualizations/roc_curve_rf.png)  
+![Curva ROC - Random Forest](visualizations/roc_curve_rf.png)   
 
-## Análise de Importância das Variáveis 
+--- 
+
+### Escolha do Melhor Modelo 
+
+Após os testes comparativos, o Random Forest foi escolhido como melhor modelo para previsão de churn. Embora Logistic Regression e Decision Tree também tenham apresentado bom desempenho, o Random Forest conseguiu combinar:
+
+* Maior recall para a classe "Yes" (clientes em risco), foco principal no problema de churn.
+
+* Equilíbrio entre precisão e recall, evitando excesso de falsos positivos.
+
+* Melhor f1-score geral para a classe "Yes", garantindo maior efetividade na detecção dos clientes que provavelmente irão cancelar.
+
+O Dummy Classifier, usado como baseline, demonstrou que prever apenas a classe majoritária (clientes que não cancelam) não atende ao objetivo do projeto, já que não identificou nenhum churn real (recall = 0 para "Yes"). 
+
+| Modelo              | Accuracy | Precision (Yes) | Recall (Yes) | F1-Score (Yes) | AUC  | AP   |
+| ------------------- | -------- | --------------- | ------------ | -------------- | ---- | ---- |
+| **Random Forest**   | **0.75** | **0.52**        | **0.81**     | **0.63**       | 0.84 | 0.66 |
+| Logistic Regression | 0.74     | 0.51            | 0.79         | 0.62           | 0.84 | 0.66 |
+| Decision Tree       | 0.73     | 0.49            | 0.81         | 0.61           | 0.83 | 0.61 |
+| Dummy Classifier    | 0.73     | 0.00            | 0.00         | 0.00           | –    | –    |
+
+
+
+➡️ Dessa forma, o **Random Forest** foi escolhido como o melhor modelo por apresentar melhor balanceamento entre as métricas e maior capacidade de identificar clientes com risco real de evasão. 
+
+---
+
+## 📊 Análise de Importância das Variáveis 
 
 ![permutation importance - Regressão Logística](visualizations/permutation_importance_logistic.png)   
 
@@ -114,19 +144,21 @@ O foco principal no projeto são em clientes que abandonam o serviço (Churn = 1
 
 ![permutation importance - Random Forest](visualizations/permutation_importance_rf.png)    
 
-## Desempenho dos Modelos
+## 📈 Principais efeitos esperados na empresa de telecom
 
-Os modelos com melhor desempenho foram: Random Forest e Regressão Logística, estes apresentaram desempenho consistente na previsão de clientes propensos a churn:
+Com base nos resultados que você obteve (onde o modelo especialmente Random Forest conseguiu bom recall para churn “Yes”), os efeitos esperados seriam:
 
-**Recall(métrica principal neste projeto)**: alta capacidade de identificar clientes que realmente cancelariam, permitindo ações preventivas mais eficazes.
+* Identificação antecipada de clientes em risco, como um radar: O modelo consegue detectar com razoável precisão quais clientes têm alta chance de cancelar. Isso permite ações preventivas.
 
-**Precisão e F1-score**: equilíbrio adequado entre falsos positivos e falsos negativos.
+* Ações de retenção direcionadas: A empresa pode focar em clientes com maior probabilidade de churn, reduzindo custos em campanhas genéricas.
 
-**AUC-ROC**: [ex.: 0.84], indicando bom poder discriminativo do modelo.
+* Otimização de recursos: Em vez de oferecer descontos ou benefícios a todos, o time de retenção foca nos clientes críticos, aumentando ROI.
 
-Estes modelos mostraram-se robustos e interpretáveis, sendo possível extrair insights das variáveis mais importantes para o negócio.  
+* Aprimoramento de ofertas e serviços: Variáveis importantes como tenure, contract type e monthly charges indicam perfis de maior risco. Esses insights ajudam a revisar políticas de contratos, preços ou planos.
 
-## Próximos passos 
+Em um contexto real, isso se traduz na capacidade de a empresa de telecom implementar ações proativas e personalizadas de retenção, aumentando a probabilidade de manter clientes de alto valor. Se a empresa conseguir reter apenas uma fração dos clientes em risco, o impacto financeiro já é significativo: maior receita preservada, menor taxa de evasão e aumento no valor de vida do cliente (LTV). Isso coloca a área de negócios em uma posição mais competitiva e orientada a dados para tomadas de decisão.
+
+## 🚀 Próximos passos e melhorias
 * Otimizar hiperparâmetros
 * Treinar outros modelos de machine learning possíveis como XGBoost com foco na melhora de performance preditiva.
 * Feature engineering
