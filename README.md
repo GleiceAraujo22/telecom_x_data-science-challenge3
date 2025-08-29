@@ -1,7 +1,7 @@
 # 📊 Telecom X – Parte 2: Previsão de Evasão de Clientes (Churn) - Machine Learning
  
 ## 📌 Descrição do Projeto
- Este projeto é a parte 2 de uma análise exploratória dos dados onde nessa etapa iremos construir modelos de machine learning para previsão de evasão de clientes de uma empresa de telecomunicações. Utilizamos técnicas avançadas de análise de dados, machine learning e balanceamento de dados para identificar os principais fatores e padrões que contribuem para evasão de clientes.  
+ Este projeto é a parte 2 de uma análise exploratória dos dados onde nessa etapa construímos modelos de machine learning para previsão de evasão de clientes de uma empresa de telecomunicações. Utilizamos técnicas avançadas de análise de dados, machine learning e balanceamento de dados para identificar os principais fatores e padrões que contribuem para evasão de clientes.  
 
  📊 [Veja o projeto completo aqui](notebooks/Telecomx_projeto_churn_parte2_ml(1).ipynb)
 
