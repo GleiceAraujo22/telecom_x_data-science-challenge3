@@ -148,7 +148,7 @@ O Dummy Classifier, usado como baseline, demonstrou que prever apenas a classe m
 
 ## 📈 Principais efeitos esperados na empresa de telecom
 
-Com base nos resultados que você obteve (onde o modelo especialmente Random Forest conseguiu bom recall para churn “Yes”), os efeitos esperados seriam:
+Com base nos resultados que se obteve (onde o modelo especialmente Random Forest conseguiu bom recall para churn “Yes”), os efeitos esperados para o projeto seriam:
 
 * Identificação antecipada de clientes em risco, como um radar: O modelo consegue detectar com razoável precisão quais clientes têm alta chance de cancelar. Isso permite ações preventivas.
 
