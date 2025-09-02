@@ -158,7 +158,7 @@ Com base nos resultados que se obteve (onde o modelo especialmente Random Forest
 
 * Aprimoramento de ofertas e serviços: Variáveis importantes como tenure, contract type e monthly charges indicam perfis de maior risco. Esses insights ajudam a revisar políticas de contratos, preços ou planos.
 
-Em um contexto real, isso se traduz na capacidade de a empresa de telecom implementar ações proativas e personalizadas de retenção, aumentando a probabilidade de manter clientes de alto valor. Se a empresa conseguir reter apenas uma fração dos clientes em risco, o impacto financeiro já é significativo: maior receita preservada, menor taxa de evasão e aumento no valor de vida do cliente (LTV). Isso coloca a área de negócios em uma posição mais competitiva e orientada a dados para tomadas de decisão.
+Em um contexto real, isso se traduz na capacidade da empresa de telecom implementar ações proativas e personalizadas de retenção, aumentando a probabilidade de manter clientes de alto valor. Se a empresa conseguir reter apenas uma fração dos clientes em risco, o impacto financeiro já é significativo: maior receita preservada, menor taxa de evasão e aumento no valor de vida do cliente (LTV). Isso coloca a área de negócios em uma posição mais competitiva e orientada a dados para tomadas de decisão.
 
 ## 🚀 Próximos passos e melhorias
 * Otimizar hiperparâmetros
