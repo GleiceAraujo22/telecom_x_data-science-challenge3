@@ -113,7 +113,7 @@ Entretanto, ao priorizar o recall, existe um **trade-off** com a precisão (prec
 
 --- 
 
-### Escolha do Melhor Modelo 
+### Escolha do Melhor Modelo para Classe 1
 
 Após os testes comparativos, o Random Forest foi escolhido como melhor modelo para previsão de churn. Embora Logistic Regression e Decision Tree também tenham apresentado bom desempenho, o Random Forest conseguiu combinar:
 
